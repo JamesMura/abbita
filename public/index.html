@@ -1,4 +1,4 @@
-<html>
+<html ng-app="abbita">
 	<head>
 		<meta charset="utf-8">
     	<title>Abbita</title>
@@ -8,11 +8,15 @@
 	<body>
 	<div class="container">
 		<h2 class="text-center">Abbita</h2>
-
-		<h4 class="text-center">Loading ....</h4>
+		<h3 class="text-center">Music Transcoder</h3>
+		<div ui-view></div>
 	</div>
 
 	<script src="/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/vendor/angular/angular.min.js"></script>
+    <script src="/vendor/angular-file-upload/angular-file-upload.min.js"></script>
+    <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/js/project.js"></script>
 	</body>
 </html>

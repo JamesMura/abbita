@@ -1,0 +1,57 @@
+<div class="row">
+	<h4 class="text-center">
+		New Session
+	</h4>
+</div>
+<div class="row">
+	<form class="col-md-12">
+		<ol>
+			<li>
+				<div class="form-group">
+					<label >Select File</label>
+					<input type="file" nv-file-select uploader="uploader" class="form-control" />
+					<div ng-show="uploader.queue.length > 0">
+						<div class="panel panel-default" ng-repeat="item in uploader.queue">
+							<div class="panel-heading">
+								<h3 class="panel-title">{{item.file.name}}</h3>
+							</div>
+							<div class="panel-body">
+
+								
+								<div class="row">
+								
+								<div class="col-md-4">
+								<h4>Details</h4>
+									<dl>
+								<dt>File Name</dt>
+								<dd>{{item.file.name}}</dd>
+								</dl>
+								<dl>
+								<dl>
+								<dt>File Type</dt>
+								<dd>{{item.file.type}}</dd>
+								</dl>
+								<dl>
+								<dt>File Size</dt>
+								<dd>{{item.file.size | bytes }}</dd>
+								</dl>
+								</div>
+								<div class="col-md-4">
+								<h4>Actions Available</h4>
+									<button ng-click="performAction(item, action)" class="btn btn-primary btn-sm btn-block" ng-repeat="action in actions">{{action}}</button>
+								</div>
+									
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ol>
+		
+	</form>
+
+	
+</div>
+
