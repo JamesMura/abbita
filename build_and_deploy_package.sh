@@ -1,6 +1,6 @@
 #! /bin/bash
 set -e
-ginkgo -r
+ginkgo -r --randomizeAllSpecs -cover
 bower install
 OUTPUT_FOLDER='builds'
 CURRENT_REVISION=`git rev-parse --short  HEAD`
