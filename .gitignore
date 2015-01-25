@@ -29,3 +29,5 @@ _testmain.go
 public/vendor
 builds/
 what.md
+node_modules/
+*.coverprofile
