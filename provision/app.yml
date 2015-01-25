@@ -11,7 +11,7 @@
   - apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=7F0CEB10 state=present
   - apt_repository: repo='deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' state=present
   - apt: pkg={{item}} state=latest
-    with_items: [nginx, supervisor, mongodb-org]
+    with_items: [nginx, supervisor, mongodb-org, libmagic-dev]
   - {user: 'name=abbita generate_ssh_key=yes ssh_key_bits=2048'}
   - {file: 'name=/home/abbita/app state=directory'}
   - {unarchive: src=../builds/latest.tar.gz dest=/home/abbita/app, notify: restart supervisor}

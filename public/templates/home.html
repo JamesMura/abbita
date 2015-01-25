@@ -35,8 +35,15 @@
 										</dl>
 									</div>
 									<div class="col-md-4">
-										<h4>Actions Available</h4>
-										<button ng-click="performAction(item, action)" class="btn btn-primary btn-sm btn-block" ng-repeat="action in actions">{{action}}</button>
+
+										<button ng-click="upload(item)" class="btn btn-primary btn-sm btn-block">Upload</button>
+										<div ng-show="uploader.isHTML5">
+											<div class="progress prg" >
+												<div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }">
+													{{item.progress + '%' }}
+												</div>
+											</div>
+										</div>
 									</div>
 
 								</div>
