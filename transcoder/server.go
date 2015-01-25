@@ -45,25 +45,7 @@ func setupRoutes(m Server) {
 func Home() string {
 	return "Hello abbita!"
 }
-func HandleError(err error, r render.Render) {
-	if err != nil {
-		r.JSON(400, map[string]string{
-			"error": err.Error(),
-		})
-	}
-}
-func generate_id() (uuid string) {
 
-	b := make([]byte, 16)
-	_, err := rand.Read(b)
-	if err != nil {
-		fmt.Println("Error: ", err)
-		return
-	}
-
-	uuid = fmt.Sprintf("%X-%X-%X-%X-%X", b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
-	return
-}
 func NewTranscodingSession(fileForm FileForm, r render.Render, db *mgo.Database) {
 	file, err := fileForm.FileUpload.Open()
 	HandleError(err, r)
@@ -88,11 +70,6 @@ func NewTranscodingSession(fileForm FileForm, r render.Render, db *mgo.Database)
 	r.JSON(200, session)
 }
 
-type DatabaseSession struct {
-	*mgo.Session
-	databaseName string
-}
-
 func GetSession(r render.Render, db *mgo.Database, params martini.Params) {
 	collection := db.C("sessions")
 	id := params["id"]
@@ -101,20 +78,23 @@ func GetSession(r render.Render, db *mgo.Database, params martini.Params) {
 	r.JSON(200, session)
 }
 
-func NewSession(name string) *DatabaseSession {
-	session, err := mgo.Dial("mongodb://localhost")
+func HandleError(err error, r render.Render) {
 	if err != nil {
-		panic(err)
+		r.JSON(400, map[string]string{
+			"error": err.Error(),
+		})
 	}
-
-	return &DatabaseSession{session, name}
 }
 
-func (session *DatabaseSession) Database() martini.Handler {
-	return func(context martini.Context) {
-		s := session.Clone()
-		context.Map(s.DB(session.databaseName))
-		defer s.Close()
-		context.Next()
+func generate_id() (uuid string) {
+
+	b := make([]byte, 16)
+	_, err := rand.Read(b)
+	if err != nil {
+		fmt.Println("Error: ", err)
+		return
 	}
+
+	uuid = fmt.Sprintf("%X-%X-%X-%X-%X", b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
+	return
 }
